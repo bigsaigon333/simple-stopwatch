@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Form(): JSX.Element {
   const [hours, setHours] = useState(0);
@@ -6,6 +6,24 @@ export default function Form(): JSX.Element {
   const [seconds, setSeconds] = useState(0);
 
   const [totalSeconds, setTotalSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (!isActive) {
+      return;
+    }
+
+    const timeId = setInterval(
+      () => setTotalSeconds((prev) => prev - 1),
+      1_000
+    );
+
+    if (totalSeconds === 0) {
+      clearInterval(timeId);
+    }
+
+    return () => clearInterval(timeId);
+  }, [isActive, totalSeconds]);
 
   return (
     <form
@@ -15,18 +33,9 @@ export default function Form(): JSX.Element {
 
         // TODO: validate hours, minutes, seconds
 
+        setIsActive(true);
+
         setTotalSeconds((hours * 60 + minutes) * 60 + seconds);
-
-        const timeId = setInterval(() => {
-          setTotalSeconds((prev) => {
-            if (prev === 0) {
-              clearInterval(timeId);
-              return 0;
-            }
-
-            return prev - 1;
-          });
-        }, 1_000);
       }}
     >
       <input
@@ -37,6 +46,7 @@ export default function Form(): JSX.Element {
         placeholder="HH"
         min="0"
         max="24"
+        disabled={isActive}
       />
       <span>:</span>
       <input
@@ -47,6 +57,7 @@ export default function Form(): JSX.Element {
         placeholder="MM"
         min="0"
         max="60"
+        disabled={isActive}
       />
       <span>:</span>
       <input
@@ -57,9 +68,12 @@ export default function Form(): JSX.Element {
         placeholder="SS"
         min="0"
         max="60"
+        disabled={isActive}
       />
-      <button type="submit">Countdown</button>
-      <p>{toTimeString(totalSeconds)}</p>
+        <button type="submit" disabled={isActive}>
+          Countdown
+        </button>
+      {isActive && <p>{toTimeString(totalSeconds)}</p>}
     </form>
   );
 }
