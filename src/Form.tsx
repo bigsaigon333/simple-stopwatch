@@ -25,6 +25,14 @@ export default function Form(): JSX.Element {
     return () => clearInterval(timeId);
   }, [isActive, totalSeconds]);
 
+  const handleResetClick = () => {
+    setHours(0);
+    setMinutes(0);
+    setSeconds(0);
+
+    setIsActive(false);
+  };
+
   return (
     <form
       className="App"
@@ -70,9 +78,18 @@ export default function Form(): JSX.Element {
         max="60"
         disabled={isActive}
       />
+      {isActive ? (
+        <>
+          <button type="button">Pause</button>
+          <button type="button" onClick={handleResetClick}>
+            Reset
+          </button>
+        </>
+      ) : (
         <button type="submit" disabled={isActive}>
           Countdown
         </button>
+      )}
       {isActive && <p>{toTimeString(totalSeconds)}</p>}
     </form>
   );
