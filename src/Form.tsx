@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Form(): JSX.Element {
   const [hours, setHours] = useState(0);
@@ -8,22 +8,28 @@ export default function Form(): JSX.Element {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
+  const timeIdRef = useRef<number>();
+
   useEffect(() => {
     if (!isActive) {
       return;
     }
 
-    const timeId = setInterval(
+    timeIdRef.current = setInterval(
       () => setTotalSeconds((prev) => prev - 1),
       1_000
     );
 
     if (totalSeconds === 0) {
-      clearInterval(timeId);
+      clearInterval(timeIdRef.current);
     }
 
-    return () => clearInterval(timeId);
+    return () => clearInterval(timeIdRef.current);
   }, [isActive, totalSeconds]);
+
+  const handlePauseClick = () => {
+    clearInterval(timeIdRef.current);
+  };
 
   const handleResetClick = () => {
     setHours(0);
@@ -80,7 +86,9 @@ export default function Form(): JSX.Element {
       />
       {isActive ? (
         <>
-          <button type="button">Pause</button>
+          <button type="button" onClick={handlePauseClick}>
+            Pause
+          </button>
           <button type="button" onClick={handleResetClick}>
             Reset
           </button>
