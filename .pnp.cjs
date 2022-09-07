@@ -36,6 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.18"],\
             ["@types/react-dom", "npm:18.0.6"],\
             ["@vitejs/plugin-react", "virtual:44534a224e36ea9d721e3acaf9dad64d76f9bf195ebb57cd8117c86b20ed800c29bbe2c3a62ea63d19176e59ad480d267a378ff9770f78a34ec599cf0f488701#npm:2.1.0"],\
+            ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:44534a224e36ea9d721e3acaf9dad64d76f9bf195ebb57cd8117c86b20ed800c29bbe2c3a62ea63d19176e59ad480d267a378ff9770f78a34ec599cf0f488701#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"],\
@@ -1816,6 +1817,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["prettier", [\
+        ["npm:2.7.1", {\
+          "packageLocation": "./.yarn/cache/prettier-npm-2.7.1-d1f40f5e1a-55a4409182.zip/node_modules/prettier/",\
+          "packageDependencies": [\
+            ["prettier", "npm:2.7.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["promise-inflight", [\
         ["npm:1.0.1", {\
           "packageLocation": "./.yarn/cache/promise-inflight-npm-1.0.1-5bb925afac-2274948309.zip/node_modules/promise-inflight/",\
@@ -2023,6 +2033,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.18"],\
             ["@types/react-dom", "npm:18.0.6"],\
             ["@vitejs/plugin-react", "virtual:44534a224e36ea9d721e3acaf9dad64d76f9bf195ebb57cd8117c86b20ed800c29bbe2c3a62ea63d19176e59ad480d267a378ff9770f78a34ec599cf0f488701#npm:2.1.0"],\
+            ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:44534a224e36ea9d721e3acaf9dad64d76f9bf195ebb57cd8117c86b20ed800c29bbe2c3a62ea63d19176e59ad480d267a378ff9770f78a34ec599cf0f488701#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"],\
