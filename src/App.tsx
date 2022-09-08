@@ -1,8 +1,11 @@
-import { useState } from "react";
-
 import "./App.css";
 import Form from "./Form";
+import { TimerProvider } from "./timerContext";
 
 export default function App(): JSX.Element {
-  return <Form />;
+  return (
+    <TimerProvider>
+      <Form />
+    </TimerProvider>
+  );
 }
