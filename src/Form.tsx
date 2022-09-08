@@ -1,43 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import InputSection from "./InputSection";
+import Sign from "./Sign";
+import {
+  TimerState,
+  useTimerState,
+  useTimerStateDispatch,
+} from "./timerContext";
 
 export default function Form(): JSX.Element {
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const dispatch = useTimerStateDispatch();
+  const timerState = useTimerState();
 
-  const [totalSeconds, setTotalSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-
-  const timeIdRef = useRef<number>();
-
-  useEffect(() => {
-    if (!isActive) {
-      return;
-    }
-
-    timeIdRef.current = setInterval(
-      () => setTotalSeconds((prev) => prev - 1),
-      1_000
-    );
-
-    if (totalSeconds === 0) {
-      clearInterval(timeIdRef.current);
-    }
-
-    return () => clearInterval(timeIdRef.current);
-  }, [isActive, totalSeconds]);
-
-  const handlePauseClick = () => {
-    clearInterval(timeIdRef.current);
-  };
-
-  const handleResetClick = () => {
-    setHours(0);
-    setMinutes(0);
-    setSeconds(0);
-
-    setIsActive(false);
-  };
+  const totalSeconds = 300;
 
   return (
     <form
@@ -47,74 +20,51 @@ export default function Form(): JSX.Element {
 
         // TODO: validate hours, minutes, seconds
 
-        setIsActive(true);
-
-        setTotalSeconds((hours * 60 + minutes) * 60 + seconds);
+        dispatch(getNextStateWhenSubmitted(timerState));
       }}
     >
-      <input
-        type="number"
-        ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
-        value={removeStartingZero(hours)}
-        onChange={(e) => setHours(e.target.valueAsNumber || 0)}
-        placeholder="HH"
-        min="0"
-        max="24"
-        disabled={isActive}
-      />
-      <span>:</span>
-      <input
-        type="number"
-        ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
-        value={removeStartingZero(minutes)}
-        onChange={(e) => setMinutes(e.target.valueAsNumber || 0)}
-        placeholder="MM"
-        min="0"
-        max="60"
-        disabled={isActive}
-      />
-      <span>:</span>
-      <input
-        type="number"
-        ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
-        value={removeStartingZero(seconds)}
-        onChange={(e) => setSeconds(e.target.valueAsNumber || 0)}
-        placeholder="SS"
-        min="0"
-        max="60"
-        disabled={isActive}
-      />
-      {isActive ? (
-        <>
-          <button type="button" onClick={handlePauseClick}>
-            Pause
-          </button>
-          <button type="button" onClick={handleResetClick}>
-            Reset
-          </button>
-        </>
-      ) : (
-        <button type="submit" disabled={isActive}>
-          Countdown
-        </button>
-      )}
-      {isActive && <p>{toTimeString(totalSeconds)}</p>}
+      <div>
+        {timerState === "idle" ? (
+          <InputSection />
+        ) : (
+          <Sign key={totalSeconds} defaultValue={totalSeconds} />
+        )}
+      </div>
+
+      <button type="submit">{getMainButtonMessage(timerState)}</button>
+      <button type="button" onClick={() => dispatch("idle")}>
+        Reset
+      </button>
     </form>
   );
 }
 
-function removeStartingZero(num: number): string {
-  return num.toString().replace(/^(0+)[^0]/, "");
+function getMainButtonMessage(state: TimerState): string {
+  switch (state) {
+    case "idle":
+      return "Start";
+    case "ticking":
+      return "Pause";
+    case "paused":
+      return "Resume";
+    case "done":
+      return "Ok";
+    default:
+      throw new Error(`Unexpected state: ${state}`);
+  }
 }
 
-function toTimeString(time: number): string {
-  const seconds = time % 60;
-  time = Math.floor(time / 60);
-  const minutes = time % 60;
-  const hours = Math.floor(time / 60);
-
-  return [hours, minutes, seconds]
-    .map((num) => num.toString())
-    .map((str) => str.padStart(2, "0"))
-    .join(":");
+function getNextStateWhenSubmitted(state: TimerState): TimerState {
+  switch (state) {
+    case "idle":
+      return "ticking";
+    case "ticking":
+      return "paused";
+    case "paused":
+      return "ticking";
+    case "done":
+      return "idle";
+    default:
+      throw new Error(`Unexpected state: ${state}`);
+  }
 }
