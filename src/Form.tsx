@@ -8,7 +8,11 @@ import {
   useTimerStateDispatch,
 } from "./timerContext";
 
-export default function Form(): JSX.Element {
+interface FormProps {
+  className?: string;
+}
+
+export default function Form({ className }: FormProps): JSX.Element {
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
 
@@ -20,7 +24,7 @@ export default function Form(): JSX.Element {
 
   return (
     <form
-      className="App"
+      className={className}
       onSubmit={(e) => {
         e.preventDefault();
 
