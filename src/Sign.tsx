@@ -1,26 +1,29 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import useInterval from "./hooks/useInterval";
-import { useTimerState } from "./timerContext";
+import { useTimerState, useTimerStateDispatch } from "./timerContext";
 
 interface SignProps {
-  defaultValue: number;
+  value: number;
+  onTimerChange: () => void;
 }
 
-export default function Sign({ defaultValue }: SignProps) {
-  const [totalSeconds, setTotalSeconds] = useState(defaultValue);
-
+export default function Sign({ value, onTimerChange }: SignProps) {
   const timerState = useTimerState();
-
-  const timerCallback = useCallback(() => {
-    setTotalSeconds((prev) => prev - 1);
-  }, [setTotalSeconds]);
+  const dispatch = useTimerStateDispatch();
 
   const clearTimer = useInterval(
-    timerCallback,
+    onTimerChange,
     timerState === "ticking" ? 1_000 : null
   );
 
-  return <p>{toTimeString(totalSeconds)}</p>;
+  useEffect(() => {
+    if (value === 0) {
+      clearTimer();
+      dispatch("done");
+    }
+  }, [value]);
+
+  return <p>{toTimeString(value)}</p>;
 }
 
 function toTimeString(time: number): string {

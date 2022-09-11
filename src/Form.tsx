@@ -1,3 +1,5 @@
+import { useCallback, useState } from "react";
+import useInterval from "./hooks/useInterval";
 import InputSection from "./InputSection";
 import Sign from "./Sign";
 import {
@@ -10,7 +12,11 @@ export default function Form(): JSX.Element {
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
 
-  const totalSeconds = 300;
+  const [totalSeconds, setTotalSeconds] = useState(0);
+
+  const timerCallback = () => {
+    setTotalSeconds((prev) => prev - 1);
+  };
 
   return (
     <form
@@ -25,9 +31,9 @@ export default function Form(): JSX.Element {
     >
       <div>
         {timerState === "idle" ? (
-          <InputSection />
+          <InputSection onSubmit={setTotalSeconds} />
         ) : (
-          <Sign key={totalSeconds} defaultValue={totalSeconds} />
+          <Sign value={totalSeconds} onTimerChange={timerCallback} />
         )}
       </div>
 

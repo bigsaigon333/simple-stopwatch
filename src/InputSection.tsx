@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Inputs(): JSX.Element {
+interface InputsProps {
+  onSubmit: (totalSeconds: number) => void;
+}
+
+export default function Inputs({ onSubmit }: InputsProps): JSX.Element {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    onSubmit(calculateTotalSeconds({ hours, minutes, seconds }));
+  }, [hours, minutes, seconds]);
 
   return (
     <div>
@@ -42,4 +50,16 @@ export default function Inputs(): JSX.Element {
 
 function removeStartingZero(num: number): string {
   return num.toString().replace(/^(0+)[^0]/, "");
+}
+
+function calculateTotalSeconds({
+  hours,
+  minutes,
+  seconds,
+}: {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}) {
+  return (hours * 60 + minutes) * 60 + seconds;
 }
