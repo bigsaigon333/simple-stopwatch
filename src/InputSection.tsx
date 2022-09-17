@@ -15,7 +15,7 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
   const trigger = useForceRerender();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    if (/\d$|^$/.test(event.target.value)) {
+    if (/^\d{0,6}$/.test(event.target.value)) {
       setValue(event.target.value);
     }
   };
