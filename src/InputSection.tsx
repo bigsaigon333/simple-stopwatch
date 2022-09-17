@@ -1,5 +1,4 @@
-import { css, keyframes } from "@emotion/react";
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import { ChangeEventHandler, useEffect, useRef, useState } from "react";
 import useForceRerender from "./hooks/useForceRerender";
 import TimeString from "./TimeString";
@@ -40,8 +39,10 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
         trigger();
       }}
     >
-      <TimeString value={value} />
-      {document.activeElement === inputRef.current && <Cursor />}
+      <TimeString
+        value={value}
+        focused={document.activeElement === inputRef.current}
+      />
       <input
         ref={inputRef}
         css={css`
@@ -72,24 +73,3 @@ function calculateTotalSeconds(value: string): number {
 
   return (hours * 60 + minutes) * 60 + seconds;
 }
-
-const flicker = keyframes`
-0% {
-  opacity: 0;
-} 75% {
-  opacity: 1;
-} 100% {
-  opacity: 0.7;
-}
-`;
-
-const Cursor = styled.span`
-  display: inline-block;
-  animation-name: ${flicker};
-  animation-iteration-count: infinite;
-  animation-duration: 0.7s;
-  animation-timing-function: ease-in-out;
-  width: 4px;
-  height: 2rem;
-  background-color: aqua;
-`;
