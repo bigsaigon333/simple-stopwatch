@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
+import Audio from "./Audio";
 import InputSection from "./InputSection";
 import Sign from "./Sign";
 import {
@@ -65,10 +66,15 @@ export default function Form({ className }: FormProps): JSX.Element {
         >
           Reset
         </button>
-        <button css={buttonCss} type="submit" disabled={totalSeconds <= 0}>
+        <button
+          css={buttonCss}
+          type="submit"
+          disabled={timerState !== "done" && totalSeconds <= 0}
+        >
           {getMainButtonMessage(timerState)}
         </button>
       </div>
+      <Audio play={timerState === "done"} />
     </form>
   );
 }
