@@ -1,6 +1,6 @@
 import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEventHandler, useEffect, useRef, useState } from "react";
 import useForceRerender from "./hooks/useForceRerender";
 
 interface InputsProps {
@@ -13,6 +13,12 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const trigger = useForceRerender();
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    if (/\d$|^$/.test(event.target.value)) {
+      setValue(event.target.value);
+    }
+  };
 
   return (
     <div
@@ -52,7 +58,7 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
         `}
         pattern="\d*"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         onBlur={trigger}
         onFocus={trigger}
       />
