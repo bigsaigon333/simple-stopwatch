@@ -65,7 +65,7 @@ export default function Form({ className }: FormProps): JSX.Element {
         >
           Reset
         </button>
-        <button css={buttonCss} type="submit">
+        <button css={buttonCss} type="submit" disabled={totalSeconds <= 0}>
           {getMainButtonMessage(timerState)}
         </button>
       </div>
