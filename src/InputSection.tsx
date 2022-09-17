@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { ChangeEventHandler, useEffect, useRef, useState } from "react";
-import useForceRerender from "./hooks/useForceRerender";
+import useBoolean from "./hooks/useBoolean";
 import TimeString from "./TimeString";
 
 interface InputsProps {
@@ -12,7 +12,7 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const trigger = useForceRerender();
+  const [isFocused, focus, blur] = useBoolean(false);
 
   useEffect(() => {
     onSubmit(calculateTotalSeconds(value));
@@ -32,10 +32,14 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
     >
       <TimeString
         value={value}
-        focused={document.activeElement === inputRef.current}
+        focused={isFocused}
         onClick={() => {
-          inputRef.current?.focus();
-          trigger();
+          if (inputRef.current == null) {
+            return;
+          }
+
+          inputRef.current.focus();
+          focus();
         }}
       />
       <input
@@ -52,8 +56,14 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
         pattern="\d*"
         value={value}
         onChange={handleChange}
-        onBlur={trigger}
-        onFocus={trigger}
+        onBlur={blur}
+        onFocus={(e) => {
+          focus();
+          e.target.setSelectionRange(
+            e.target.value.length,
+            e.target.value.length
+          );
+        }}
       />
     </div>
   );
