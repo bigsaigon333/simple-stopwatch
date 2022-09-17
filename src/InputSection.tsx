@@ -2,6 +2,7 @@ import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ChangeEventHandler, useEffect, useRef, useState } from "react";
 import useForceRerender from "./hooks/useForceRerender";
+import TimeString from "./TimeString";
 
 interface InputsProps {
   onSubmit: (totalSeconds: number) => void;
@@ -13,6 +14,10 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const trigger = useForceRerender();
+
+  useEffect(() => {
+    onSubmit(calculateTotalSeconds(value));
+  }, [value]);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     if (/^\d{0,6}$/.test(event.target.value)) {
@@ -28,22 +33,14 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
         height: 3rem;
         padding: 0.25rem;
         box-sizing: border-box;
+        text-align: right;
       `}
       onClick={() => {
         inputRef.current?.focus();
         trigger();
       }}
     >
-      {value.split("").map((ch, idx) => (
-        <span
-          css={css`
-            font-size: 2rem;
-          `}
-          key={ch + idx}
-        >
-          {ch}
-        </span>
-      ))}
+      <TimeString value={value} />
       {document.activeElement === inputRef.current && <Cursor />}
       <input
         ref={inputRef}
@@ -66,19 +63,13 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
   );
 }
 
-function removeStartingZero(num: number): string {
-  return num.toString().replace(/^(0+)[^0]/, "");
-}
+function calculateTotalSeconds(value: string): number {
+  const timeString = value.padStart(6, "0");
 
-function calculateTotalSeconds({
-  hours,
-  minutes,
-  seconds,
-}: {
-  hours: number;
-  minutes: number;
-  seconds: number;
-}) {
+  const hours = Number(timeString.slice(0, 2));
+  const minutes = Number(timeString.slice(2, 4));
+  const seconds = Number(timeString.slice(4, 6));
+
   return (hours * 60 + minutes) * 60 + seconds;
 }
 
@@ -87,8 +78,7 @@ const flicker = keyframes`
   opacity: 0;
 } 75% {
   opacity: 1;
-}
-100% {
+} 100% {
   opacity: 0.7;
 }
 `;
