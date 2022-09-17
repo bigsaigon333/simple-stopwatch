@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import useInterval from "./hooks/useInterval";
+import { css } from "@emotion/react";
+import { useState } from "react";
 import InputSection from "./InputSection";
 import Sign from "./Sign";
 import {
@@ -25,6 +25,9 @@ export default function Form({ className }: FormProps): JSX.Element {
   return (
     <form
       className={className}
+      css={css`
+        width: 25rem;
+      `}
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -33,7 +36,11 @@ export default function Form({ className }: FormProps): JSX.Element {
         dispatch(getNextStateWhenSubmitted(timerState));
       }}
     >
-      <div>
+      <div
+        css={css`
+          margin-bottom: 2rem;
+        `}
+      >
         {timerState === "idle" ? (
           <InputSection onSubmit={setTotalSeconds} />
         ) : (
@@ -41,10 +48,27 @@ export default function Form({ className }: FormProps): JSX.Element {
         )}
       </div>
 
-      <button type="submit">{getMainButtonMessage(timerState)}</button>
-      <button type="button" onClick={() => dispatch("idle")}>
-        Reset
-      </button>
+      <div
+        css={css`
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        `}
+      >
+        <button
+          css={css`
+            ${buttonCss}
+            color: red;
+          `}
+          type="button"
+          onClick={() => dispatch("idle")}
+        >
+          Reset
+        </button>
+        <button css={buttonCss} type="submit">
+          {getMainButtonMessage(timerState)}
+        </button>
+      </div>
     </form>
   );
 }
@@ -78,3 +102,12 @@ function getNextStateWhenSubmitted(state: TimerState): TimerState {
       throw new Error(`Unexpected state: ${state}`);
   }
 }
+
+const buttonCss = css`
+  width: 8rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0;
+`;

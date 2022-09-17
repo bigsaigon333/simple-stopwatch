@@ -1,10 +1,11 @@
+import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
 
 interface InputsProps {
   onSubmit: (totalSeconds: number) => void;
 }
 
-export default function Inputs({ onSubmit }: InputsProps): JSX.Element {
+export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -14,8 +15,9 @@ export default function Inputs({ onSubmit }: InputsProps): JSX.Element {
   }, [hours, minutes, seconds]);
 
   return (
-    <div>
+    <>
       <input
+        css={inputCss}
         type="number"
         ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
         value={removeStartingZero(hours)}
@@ -24,8 +26,8 @@ export default function Inputs({ onSubmit }: InputsProps): JSX.Element {
         min="0"
         max="24"
       />
-      <span>:</span>
       <input
+        css={inputCss}
         type="number"
         ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
         value={removeStartingZero(minutes)}
@@ -34,8 +36,8 @@ export default function Inputs({ onSubmit }: InputsProps): JSX.Element {
         min="0"
         max="60"
       />
-      <span>:</span>
       <input
+        css={inputCss}
         type="number"
         ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
         value={removeStartingZero(seconds)}
@@ -44,7 +46,7 @@ export default function Inputs({ onSubmit }: InputsProps): JSX.Element {
         min="0"
         max="60"
       />
-    </div>
+    </>
   );
 }
 
@@ -63,3 +65,12 @@ function calculateTotalSeconds({
 }) {
   return (hours * 60 + minutes) * 60 + seconds;
 }
+
+const inputCss = css`
+  width: 7rem;
+  height: 3rem;
+  border: none;
+  background-color: transparent;
+  font-size: 3rem;
+  text-align: center;
+`;

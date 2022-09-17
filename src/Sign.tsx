@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import { useEffect } from "react";
 import useInterval from "./hooks/useInterval";
 import { useTimerState, useTimerStateDispatch } from "./timerContext";
@@ -23,7 +24,17 @@ export default function Sign({ value, onTimerChange }: SignProps) {
     }
   }, [value]);
 
-  return <p>{toTimeString(value)}</p>;
+  return (
+    <p
+      css={css`
+        font-size: 3rem;
+        height: 3rem;
+        margin: 0;
+      `}
+    >
+      {toTimeString(value)}
+    </p>
+  );
 }
 
 function toTimeString(time: number): string {
