@@ -1,52 +1,62 @@
-import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { css, keyframes } from "@emotion/react";
+import styled from "@emotion/styled";
+import { useEffect, useRef, useState } from "react";
+import useForceRerender from "./hooks/useForceRerender";
 
 interface InputsProps {
   onSubmit: (totalSeconds: number) => void;
 }
 
 export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [value, setValue] = useState("");
 
-  useEffect(() => {
-    onSubmit(calculateTotalSeconds({ hours, minutes, seconds }));
-  }, [hours, minutes, seconds]);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const trigger = useForceRerender();
 
   return (
-    <>
+    <div
+      css={css`
+        position: relative;
+        width: 100%;
+        height: 3rem;
+        padding: 0.25rem;
+        box-sizing: border-box;
+      `}
+      onClick={() => {
+        inputRef.current?.focus();
+        trigger();
+      }}
+    >
+      {value.split("").map((ch, idx) => (
+        <span
+          css={css`
+            font-size: 2rem;
+          `}
+          key={ch + idx}
+        >
+          {ch}
+        </span>
+      ))}
+      {document.activeElement === inputRef.current && <Cursor />}
       <input
-        css={inputCss}
-        type="number"
-        ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
-        value={removeStartingZero(hours)}
-        onChange={(e) => setHours(e.target.valueAsNumber || 0)}
-        placeholder="HH"
-        min="0"
-        max="24"
+        ref={inputRef}
+        css={css`
+          height: 0px;
+          left: 20px;
+          position: absolute;
+          opacity: 0;
+          top: 20px;
+          width: 0;
+          z-index: -2;
+        `}
+        pattern="\d*"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={trigger}
+        onFocus={trigger}
       />
-      <input
-        css={inputCss}
-        type="number"
-        ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
-        value={removeStartingZero(minutes)}
-        onChange={(e) => setMinutes(e.target.valueAsNumber || 0)}
-        placeholder="MM"
-        min="0"
-        max="60"
-      />
-      <input
-        css={inputCss}
-        type="number"
-        ref={(ref) => ref && ref.value === "0" && (ref.value = "")}
-        value={removeStartingZero(seconds)}
-        onChange={(e) => setSeconds(e.target.valueAsNumber || 0)}
-        placeholder="SS"
-        min="0"
-        max="60"
-      />
-    </>
+    </div>
   );
 }
 
@@ -66,11 +76,24 @@ function calculateTotalSeconds({
   return (hours * 60 + minutes) * 60 + seconds;
 }
 
-const inputCss = css`
-  width: 7rem;
-  height: 3rem;
-  border: none;
-  background-color: transparent;
-  font-size: 3rem;
-  text-align: center;
+const flicker = keyframes`
+0% {
+  opacity: 0;
+} 75% {
+  opacity: 1;
+}
+100% {
+  opacity: 0.7;
+}
+`;
+
+const Cursor = styled.span`
+  display: inline-block;
+  animation-name: ${flicker};
+  animation-iteration-count: infinite;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  width: 4px;
+  height: 2rem;
+  background-color: aqua;
 `;
