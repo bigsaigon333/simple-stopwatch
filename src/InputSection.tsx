@@ -28,20 +28,15 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
     <div
       css={css`
         position: relative;
-        width: 100%;
-        height: 3rem;
-        padding: 0.25rem;
-        box-sizing: border-box;
-        text-align: right;
       `}
-      onClick={() => {
-        inputRef.current?.focus();
-        trigger();
-      }}
     >
       <TimeString
         value={value}
         focused={document.activeElement === inputRef.current}
+        onClick={() => {
+          inputRef.current?.focus();
+          trigger();
+        }}
       />
       <input
         ref={inputRef}

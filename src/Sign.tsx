@@ -1,7 +1,7 @@
-import { css } from "@emotion/react";
 import { useEffect } from "react";
 import useInterval from "./hooks/useInterval";
 import { useTimerState, useTimerStateDispatch } from "./timerContext";
+import TimeString from "./TimeString";
 
 interface SignProps {
   value: number;
@@ -25,15 +25,9 @@ export default function Sign({ value, onTimerChange }: SignProps) {
   }, [value]);
 
   return (
-    <p
-      css={css`
-        font-size: 3rem;
-        height: 3rem;
-        margin: 0;
-      `}
-    >
-      {toTimeString(value)}
-    </p>
+    <div>
+      <TimeString value={toTimeString(value)} />
+    </div>
   );
 }
 
@@ -46,5 +40,5 @@ function toTimeString(time: number): string {
   return [hours, minutes, seconds]
     .map((num) => num.toString())
     .map((str) => str.padStart(2, "0"))
-    .join(":");
+    .join("");
 }

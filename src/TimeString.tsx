@@ -3,16 +3,18 @@ import { css } from "@emotion/react";
 export default function TimeString({
   value,
   focused = false,
+  onClick,
 }: {
   value: string;
   focused?: boolean;
+  onClick?: () => void;
 }): JSX.Element {
   const pad = "0".repeat(6 - value.length);
 
   const [H1, H2, M1, M2, S1, S2] = [...pad, ...value].map((char, index) => (
     <span
       css={css`
-        font-size: 2rem;
+        font-size: 3rem;
         ${index < pad.length ? "color: gray;" : "color: white;"}
         ${index === 5 && focused && "border-right: 1px solid white;"}
       `}
@@ -24,8 +26,26 @@ export default function TimeString({
   return (
     <div
       css={css`
-        display: inline-block;
+        display: inline-flex;
+        font-size: 2rem;
+        line-height: 1;
+        align-items: flex-end;
+        font-weight: 500;
+
+        box-sizing: border-box;
+        height: 4rem;
+
+        ${focused
+          ? css`
+              border-bottom: 2px solid white;
+              padding-bottom: 11px;
+            `
+          : css`
+              border-bottom: 1px solid gray;
+              padding-bottom: 12px;
+            `}
       `}
+      onClick={onClick}
     >
       {H1}
       {H2}
