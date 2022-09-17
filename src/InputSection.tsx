@@ -32,6 +32,7 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
     >
       <TimeString
         value={value}
+        dirty
         focused={isFocused}
         onClick={() => {
           if (inputRef.current == null) {

@@ -3,10 +3,12 @@ import { css } from "@emotion/react";
 export default function TimeString({
   value,
   focused = false,
+  dirty = false,
   onClick,
 }: {
   value: string;
   focused?: boolean;
+  dirty?: boolean;
   onClick?: () => void;
 }): JSX.Element {
   const pad = "0".repeat(6 - value.length);
@@ -35,13 +37,17 @@ export default function TimeString({
         box-sizing: border-box;
         height: 4rem;
 
-        ${focused
-          ? css`
-              border-bottom: 2px solid white;
-              padding-bottom: 11px;
-            `
+        ${dirty
+          ? focused
+            ? css`
+                border-bottom: 2px solid white;
+                padding-bottom: 10px;
+              `
+            : css`
+                border-bottom: 1px solid gray;
+                padding-bottom: 11px;
+              `
           : css`
-              border-bottom: 1px solid gray;
               padding-bottom: 12px;
             `}
       `}
