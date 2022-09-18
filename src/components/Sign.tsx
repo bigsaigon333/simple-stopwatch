@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useInterval from "./hooks/useInterval";
-import { useTimerState, useTimerStateDispatch } from "./timerContext";
+import useInterval from "../hooks/useInterval";
+import { useTimerState, useTimerStateDispatch } from "../contexts/timerContext";
 import TimeString from "./TimeString";
-import { toTimeString } from "./utils";
+import { toTimeString } from "../utils/utils";
 
 interface SignProps {
   defaultValue: number;

@@ -5,21 +5,21 @@ import {
   ReactNode,
   useState,
 } from "react";
-import useBoolean from "./hooks/useBoolean";
+import useBoolean from "../hooks/useBoolean";
 import Input from "./Input";
-import { toTotalSeconds } from "./utils";
+import { toTotalSeconds } from "../utils/utils";
 
-interface FormProps {
+interface EditFormProps {
   children?: ReactNode;
   onSubmit: (seconds: number) => void;
   placeholder: string;
 }
 
-export default function Form({
+export default function EditForm({
   children,
   onSubmit,
   placeholder,
-}: FormProps): JSX.Element {
+}: EditFormProps): JSX.Element {
   const [value, setValue] = useState("");
   const [isDirty, getDirty] = useBoolean(false);
 
@@ -37,7 +37,11 @@ export default function Form({
 
   return (
     <form css={formCss} onSubmit={handleSubmit}>
-      <Input value={value} onChange={handleChange} placeholder={placeholder} />
+      <Input
+        value={value}
+        onChange={handleChange}
+        {...(!isDirty && { placeholder })}
+      />
       {children}
     </form>
   );

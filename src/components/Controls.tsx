@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
 import Audio from "./Audio";
-import useBoolean from "./hooks/useBoolean";
+import useBoolean from "../hooks/useBoolean";
 import {
   TimerState,
   useTimerState,
   useTimerStateDispatch,
-} from "./timerContext";
+} from "../contexts/timerContext";
 
 export default function Controls(): JSX.Element {
   const dispatch = useTimerStateDispatch();

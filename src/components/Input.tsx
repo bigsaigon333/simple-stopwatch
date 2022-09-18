@@ -1,11 +1,10 @@
 import { css } from "@emotion/react";
 import { InputHTMLAttributes, useRef } from "react";
-import useBoolean from "./hooks/useBoolean";
+import useBoolean from "../hooks/useBoolean";
 import TimeString from "./TimeString";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
-  placeholder: string;
 }
 
 export default function Input({

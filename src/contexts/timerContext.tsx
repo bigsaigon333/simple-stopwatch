@@ -6,7 +6,7 @@ import {
   useContext,
   useState,
 } from "react";
-import { assert, isNonNullable } from "./utils";
+import { assert, isNonNullable } from "../utils/utils";
 
 export type TimerState = "edit" | "ticking" | "paused" | "done";
 
