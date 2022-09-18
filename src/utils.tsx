@@ -25,3 +25,13 @@ export function toTimeString(time: number): string {
       .replace(/^0*/, "") || "0"
   );
 }
+
+export function toTotalSeconds(value: string): number {
+  const timeString = value.padStart(6, "0");
+
+  const hours = Number(timeString.slice(0, 2));
+  const minutes = Number(timeString.slice(2, 4));
+  const seconds = Number(timeString.slice(4, 6));
+
+  return (hours * 60 + minutes) * 60 + seconds;
+}
