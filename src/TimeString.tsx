@@ -1,18 +1,22 @@
 import { css } from "@emotion/react";
 import TimeCharacter, { TimeCharacterProps } from "./TimeCharacter";
 
+interface TimeStringProps {
+  value: string;
+  focused?: boolean;
+  dirty?: boolean;
+  placeholder?: string;
+  onClick?: () => void;
+}
+
 export default function TimeString({
   value,
   focused = false,
   dirty = false,
+  placeholder = "0".repeat(6),
   onClick,
-}: {
-  value: string;
-  focused?: boolean;
-  dirty?: boolean;
-  onClick?: () => void;
-}): JSX.Element {
-  const zeroPad = "0".repeat(6 - value.length);
+}: TimeStringProps): JSX.Element {
+  const zeroPad = placeholder.slice(0, 6 - value.length);
 
   const [H1, H2, M1, M2, S1, S2] = [
     ...zeroPad,

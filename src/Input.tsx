@@ -5,9 +5,14 @@ import TimeString from "./TimeString";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
+  placeholder: string;
 }
 
-export default function Input({ value, onChange }: InputProps): JSX.Element {
+export default function Input({
+  value,
+  onChange,
+  placeholder,
+}: InputProps): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, focus, blur] = useBoolean(false);
@@ -21,6 +26,7 @@ export default function Input({ value, onChange }: InputProps): JSX.Element {
       <TimeString
         value={value}
         dirty
+        placeholder={placeholder}
         focused={isFocused}
         onClick={() => {
           if (inputRef.current == null) {

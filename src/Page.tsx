@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import { useState } from "react";
 import Controls from "./Controls";
 import Form, { formCss } from "./Form";
@@ -8,6 +7,7 @@ import {
   useTimerState,
   getNextStateWhenSubmitted,
 } from "./timerContext";
+import { toTimeString } from "./utils";
 
 export default function Page(): JSX.Element {
   const dispatch = useTimerStateDispatch();
@@ -21,24 +21,23 @@ export default function Page(): JSX.Element {
     dispatch(getNextStateWhenSubmitted(timerState));
   };
 
-  return (
-    <>
-      {timerState === "edit" ? (
-        <Form onSubmit={handleSubmit}>
-          <Controls />
-        </Form>
-      ) : (
-        <form
-          css={formCss}
-          onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(getNextStateWhenSubmitted(timerState));
-          }}
-        >
-          <Sign key={totalSeconds} defaultValue={totalSeconds} />
-          <Controls />
-        </form>
-      )}
-    </>
+  return timerState === "edit" ? (
+    <Form
+      onSubmit={handleSubmit}
+      placeholder={toTimeString(totalSeconds).padStart(6, "0")}
+    >
+      <Controls />
+    </Form>
+  ) : (
+    <form
+      css={formCss}
+      onSubmit={(e) => {
+        e.preventDefault();
+        dispatch(getNextStateWhenSubmitted(timerState));
+      }}
+    >
+      <Sign key={totalSeconds} defaultValue={totalSeconds} />
+      <Controls />
+    </form>
   );
 }
