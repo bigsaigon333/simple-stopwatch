@@ -49,3 +49,18 @@ export function TimerProvider({
     </timerStateDispatchContext.Provider>
   );
 }
+
+export function getNextStateWhenSubmitted(state: TimerState): TimerState {
+  switch (state) {
+    case "edit":
+      return "ticking";
+    case "ticking":
+      return "paused";
+    case "paused":
+      return "ticking";
+    case "done":
+      return "edit";
+    default:
+      throw new Error(`Unexpected state: ${state}`);
+  }
+}
