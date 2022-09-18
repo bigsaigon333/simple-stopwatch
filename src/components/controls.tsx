@@ -6,12 +6,21 @@ import {
   useTimerStateDispatch,
 } from "../contexts/timer-context";
 import useToggle from "../hooks/use-toggle";
+import { useEffect, useRef } from "react";
 
 export default function Controls(): JSX.Element {
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
 
   const [muted, toggle] = useToggle(false);
+
+  const okButtonReference = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (timerState === "done" && okButtonReference.current != undefined) {
+      okButtonReference.current.focus();
+    }
+  }, [timerState]);
 
   return (
     <div
@@ -21,7 +30,7 @@ export default function Controls(): JSX.Element {
         justify-content: space-between;
       `}
     >
-      <button css={buttonCss} type="submit">
+      <button css={buttonCss} type="submit" ref={okButtonReference}>
         {getMainButtonMessage(timerState)}
       </button>
       <button
