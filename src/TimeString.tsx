@@ -12,27 +12,22 @@ export default function TimeString({
   dirty?: boolean;
   onClick?: () => void;
 }): JSX.Element {
-  const pad = "0".repeat(6 - value.length);
+  const zeroPad = "0".repeat(6 - value.length);
 
-  const zeroPad = !dirty ? /^0*/.exec(value)?.[0] ?? "" : "";
-
-  const [H1, H2, M1, M2, S1, S2] = [...pad, ...value].map<TimeCharacterProps>(
-    (char, index) => ({
-      color: index < pad.length ? "gray" : "white",
-      visible:
-        dirty ||
-        index >= zeroPad.length ||
-        (index == 5 && zeroPad.length === 6),
-      cursor: index === 5 && focused,
-      char,
-      index,
-      fontSize: "large",
-    })
-  );
+  const [H1, H2, M1, M2, S1, S2] = [
+    ...zeroPad,
+    ...value,
+  ].map<TimeCharacterProps>((char, index) => ({
+    color: index < zeroPad.length ? "gray" : "white",
+    visible: dirty || index >= zeroPad.length,
+    cursor: dirty && focused && index === 5,
+    char,
+    fontSize: "large",
+  }));
 
   const hourMeasure: TimeCharacterProps = {
     color: value.length > 4 ? "white" : "gray",
-    visible: dirty || zeroPad.length < 2,
+    visible: dirty || value.length > 4,
     marginLeft: "1px",
     marginRight: "2px",
     char: "h",
@@ -41,7 +36,7 @@ export default function TimeString({
 
   const minuteMeasure: TimeCharacterProps = {
     color: value.length > 2 ? "white" : "gray",
-    visible: dirty || zeroPad.length < 4,
+    visible: dirty || value.length > 2,
     marginLeft: "1px",
     marginRight: "2px",
     char: "m",
@@ -50,7 +45,7 @@ export default function TimeString({
 
   const secondMeasure: TimeCharacterProps = {
     color: value.length > 0 ? "white" : "gray",
-    visible: dirty || zeroPad.length <= 6,
+    visible: dirty || value.length > 0,
     marginLeft: focused ? "1px" : 0,
     marginRight: "2px",
     char: "s",

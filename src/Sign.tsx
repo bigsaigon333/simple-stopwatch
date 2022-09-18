@@ -37,8 +37,11 @@ function toTimeString(time: number): string {
   const minutes = time % 60;
   const hours = Math.floor(time / 60);
 
-  return [hours, minutes, seconds]
-    .map((num) => num.toString())
-    .map((str) => str.padStart(2, "0"))
-    .join("");
+  return (
+    [hours, minutes, seconds]
+      .map((num) => num.toString())
+      .map((str) => str.padStart(2, "0"))
+      .join("")
+      .replace(/^0*/, "") || "0"
+  );
 }
