@@ -9,7 +9,7 @@ export const assert: <T extends U, U = unknown>(
 
 export const isNonNullable = <T,>(
   v: T
-): v is T extends infer U | null | undefined ? U : T => v != null;
+): v is T extends infer U | null | undefined ? U : T => v != undefined;
 
 export function toTimeString(time: number): string {
   const seconds = time % 60;
@@ -19,8 +19,8 @@ export function toTimeString(time: number): string {
 
   return (
     [hours, minutes, seconds]
-      .map((num) => num.toString())
-      .map((str) => str.padStart(2, "0"))
+      .map((number_) => number_.toString())
+      .map((string_) => string_.padStart(2, "0"))
       .join("")
       .replace(/^0*/, "") || "0"
   );
