@@ -46,7 +46,7 @@ export default function TimeString({
   const secondMeasure: TimeCharacterProps = {
     color: value.length > 0 ? "white" : "gray",
     visible: dirty || value.length > 0,
-    marginLeft: focused ? "1px" : 0,
+    marginLeft: focused ? 0 : "1px",
     marginRight: "2px",
     char: "s",
     fontSize: "medium",

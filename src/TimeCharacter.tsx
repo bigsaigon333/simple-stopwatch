@@ -28,8 +28,8 @@ export default function TimeCharacter({
         color: ${color};
         ${!visible && "display: none;"}
         ${cursor && "border-right: 1px solid white;"}
-        ${marginLeft != null && `margin-left:${marginLeft}`}
-        ${marginRight != null && `margin-right:${marginRight}`}
+        ${marginLeft != null && `margin-left:${marginLeft};`}
+        ${marginRight != null && `margin-right:${marginRight};`}
         ${fontSize === "medium" && "font-size: 2rem;"}
         ${fontSize === "large" && "font-size: 3rem;"}
       `}
