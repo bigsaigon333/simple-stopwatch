@@ -21,8 +21,8 @@ export default function Controls(): JSX.Element {
         justify-content: space-between;
       `}
     >
-      <button css={buttonCss} type="button" onClick={() => toggle()}>
-        {muted ? "unmute" : "mute"}
+      <button css={buttonCss} type="submit">
+        {getMainButtonMessage(timerState)}
       </button>
       <button
         css={css`
@@ -34,8 +34,8 @@ export default function Controls(): JSX.Element {
       >
         Reset
       </button>
-      <button css={buttonCss} type="submit">
-        {getMainButtonMessage(timerState)}
+      <button css={buttonCss} type="button" onClick={() => toggle()}>
+        {muted ? "unmute" : "mute"}
       </button>
       <Audio play={timerState === "done"} muted={muted} />
     </div>
