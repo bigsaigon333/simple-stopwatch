@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
-import { InputHTMLAttributes, useRef } from "react";
+import { InputHTMLAttributes, useEffect, useRef } from "react";
+import { useTimerState } from "../contexts/timer-context";
 import useBoolean from "../hooks/use-boolean";
 import TimeString from "./time-string";
 
@@ -7,14 +8,23 @@ interface InputProperties extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
 }
 
-export default function Input({
+export default (function Input({
   value,
   onChange,
   placeholder,
 }: InputProperties): JSX.Element {
-  const inputReference = useRef<HTMLInputElement>(null);
+  const timerState = useTimerState();
 
   const [isFocused, focus, blur] = useBoolean(false);
+
+  const inputReference = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (timerState === "edit") {
+      inputReference.current?.focus();
+      focus();
+    }
+  }, [timerState]);
 
   return (
     <div
@@ -61,4 +71,4 @@ export default function Input({
       />
     </div>
   );
-}
+});
