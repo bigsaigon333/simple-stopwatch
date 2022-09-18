@@ -48,7 +48,8 @@ export default function EditForm({
 }
 
 export const formCss = css`
-  width: 25rem;
+  width: 17rem;
+
   display: flex;
   row-gap: 2rem;
   flex-direction: column;

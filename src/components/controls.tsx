@@ -58,10 +58,10 @@ function getMainButtonMessage(state: TimerState): string {
 }
 
 const buttonCss = css`
-  width: 8rem;
-  height: 3.5rem;
+  width: 4.5rem;
+  height: 3rem;
   border-radius: 1rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   padding: 0;
 `;
