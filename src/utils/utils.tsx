@@ -11,19 +11,19 @@ export const isNonNullable = <T,>(
   v: T
 ): v is T extends infer U | null | undefined ? U : T => v != undefined;
 
-export function toTimeString(time: number): string {
+export function toTimeTuple(time: number): [string, string, string] {
   const seconds = time % 60;
   time = Math.floor(time / 60);
   const minutes = time % 60;
   const hours = Math.floor(time / 60);
 
-  return (
-    [hours, minutes, seconds]
-      .map((number_) => number_.toString())
-      .map((string_) => string_.padStart(2, "0"))
-      .join("")
-      .replace(/^0*/, "") || "0"
-  );
+  return [hours, minutes, seconds]
+    .map((number_) => number_.toString())
+    .map((string_) => string_.padStart(2, "0")) as [string, string, string];
+}
+
+export function toTimeString(time: number): string {
+  return toTimeTuple(time).join("").replace(/^0*/, "") || "0";
 }
 
 export function toTotalSeconds(value: string): number {

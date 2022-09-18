@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import useInterval from "../hooks/use-interval";
 import {
   useTimerState,
   useTimerStateDispatch,
 } from "../contexts/timer-context";
 import TimeString from "./time-string";
-import { toTimeString } from "../utils/utils";
+import { toTimeString, toTimeTuple } from "../utils/utils";
 
 interface SignProperties {
   defaultValue: number;
@@ -31,6 +32,9 @@ export default function Sign({ defaultValue }: SignProperties) {
 
   return (
     <div>
+      <Helmet>
+        <title>{toTimeTuple(leftTime).join(":")}</title>
+      </Helmet>
       <TimeString value={toTimeString(leftTime)} />
     </div>
   );
