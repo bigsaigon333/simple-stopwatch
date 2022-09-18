@@ -1,28 +1,16 @@
 import { css } from "@emotion/react";
-import { ChangeEventHandler, useEffect, useRef, useState } from "react";
+import { InputHTMLAttributes, useRef } from "react";
 import useBoolean from "./hooks/useBoolean";
 import TimeString from "./TimeString";
 
-interface InputsProps {
-  onSubmit: (totalSeconds: number) => void;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  value: string;
 }
 
-export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
-  const [value, setValue] = useState("");
-
+export default function Input({ value, onChange }: InputProps): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, focus, blur] = useBoolean(false);
-
-  useEffect(() => {
-    onSubmit(calculateTotalSeconds(value));
-  }, [value]);
-
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    if (/^\d{0,6}$/.test(event.target.value)) {
-      setValue(event.target.value);
-    }
-  };
 
   return (
     <div
@@ -56,7 +44,7 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
         `}
         pattern="\d*"
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         onBlur={blur}
         onFocus={(e) => {
           focus();
@@ -68,14 +56,4 @@ export default function InputSection({ onSubmit }: InputsProps): JSX.Element {
       />
     </div>
   );
-}
-
-function calculateTotalSeconds(value: string): number {
-  const timeString = value.padStart(6, "0");
-
-  const hours = Number(timeString.slice(0, 2));
-  const minutes = Number(timeString.slice(2, 4));
-  const seconds = Number(timeString.slice(4, 6));
-
-  return (hours * 60 + minutes) * 60 + seconds;
 }

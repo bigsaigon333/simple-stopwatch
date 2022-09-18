@@ -1,10 +1,10 @@
-import Form from "./Form";
+import Page from "./Page";
 import { TimerProvider } from "./timerContext";
 
 export default function App(): JSX.Element {
   return (
     <TimerProvider>
-      <Form />
+      <Page />
     </TimerProvider>
   );
 }

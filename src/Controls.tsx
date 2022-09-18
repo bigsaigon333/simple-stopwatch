@@ -6,11 +6,11 @@ import {
   useTimerState,
   useTimerStateDispatch,
 } from "./timerContext";
-import { toTotalSeconds } from "./utils";
 
-export default function Controls({ value }: { value: string }): JSX.Element {
+export default function Controls(): JSX.Element {
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
+
   const [muted, , , toggle] = useBoolean(false);
 
   return (
@@ -34,11 +34,7 @@ export default function Controls({ value }: { value: string }): JSX.Element {
       >
         Reset
       </button>
-      <button
-        css={buttonCss}
-        type="submit"
-        disabled={timerState !== "done" && toTotalSeconds(value) <= 0}
-      >
+      <button css={buttonCss} type="submit">
         {getMainButtonMessage(timerState)}
       </button>
       <Audio play={timerState === "done"} muted={muted} />
