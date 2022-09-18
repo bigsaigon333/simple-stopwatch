@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import useInterval from "./hooks/useInterval";
 import { useTimerState, useTimerStateDispatch } from "./timerContext";
 import TimeString from "./TimeString";
+import { toTimeString } from "./utils";
 
 interface SignProps {
   value: number;
@@ -28,20 +29,5 @@ export default function Sign({ value, onTimerChange }: SignProps) {
     <div>
       <TimeString value={toTimeString(value)} />
     </div>
-  );
-}
-
-function toTimeString(time: number): string {
-  const seconds = time % 60;
-  time = Math.floor(time / 60);
-  const minutes = time % 60;
-  const hours = Math.floor(time / 60);
-
-  return (
-    [hours, minutes, seconds]
-      .map((num) => num.toString())
-      .map((str) => str.padStart(2, "0"))
-      .join("")
-      .replace(/^0*/, "") || "0"
   );
 }
