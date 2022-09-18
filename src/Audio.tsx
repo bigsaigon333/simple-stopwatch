@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { AudioHTMLAttributes, HTMLAttributes, useEffect, useRef } from "react";
 
 export default function Audio({
   play = false,
+  ...rest
 }: {
   play?: boolean;
-}): JSX.Element {
+} & AudioHTMLAttributes<HTMLAudioElement>): JSX.Element {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function Audio({
   }, [play]);
 
   return (
-    <audio ref={audioRef} loop={true}>
+    <audio ref={audioRef} loop={true} {...rest}>
       <source type="audio/ogg" src={AUDIO_OGG} />
       <source type="audio/mp3" src={AUDIO_MP3} />
     </audio>

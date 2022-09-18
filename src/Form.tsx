@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
 import Audio from "./Audio";
+import useBoolean from "./hooks/useBoolean";
 import InputSection from "./InputSection";
 import Sign from "./Sign";
 import {
@@ -18,6 +19,7 @@ export default function Form({ className }: FormProps): JSX.Element {
   const timerState = useTimerState();
 
   const [totalSeconds, setTotalSeconds] = useState(0);
+  const [muted, , , toggle] = useBoolean(false);
 
   const timerCallback = () => {
     setTotalSeconds((prev) => prev - 1);
@@ -31,8 +33,6 @@ export default function Form({ className }: FormProps): JSX.Element {
       `}
       onSubmit={(e) => {
         e.preventDefault();
-
-        // TODO: validate hours, minutes, seconds
 
         dispatch(getNextStateWhenSubmitted(timerState));
       }}
@@ -56,6 +56,9 @@ export default function Form({ className }: FormProps): JSX.Element {
           justify-content: space-between;
         `}
       >
+        <button css={buttonCss} type="button" onClick={() => toggle()}>
+          {muted ? "unmute" : "mute"}
+        </button>
         <button
           css={css`
             ${buttonCss}
@@ -74,7 +77,8 @@ export default function Form({ className }: FormProps): JSX.Element {
           {getMainButtonMessage(timerState)}
         </button>
       </div>
-      <Audio play={timerState === "done"} />
+
+      <Audio play={timerState === "done"} muted={muted} />
     </form>
   );
 }
