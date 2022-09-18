@@ -8,7 +8,7 @@ import {
 } from "react";
 import { assert, isNonNullable } from "./utils";
 
-export type TimerState = "idle" | "ticking" | "paused" | "done";
+export type TimerState = "edit" | "ticking" | "paused" | "done";
 
 const timerStateContext = createContext<TimerState | undefined>(undefined);
 
@@ -39,7 +39,7 @@ export function TimerProvider({
 }: {
   children?: ReactNode;
 }): JSX.Element {
-  const [timerState, setTimerState] = useState<TimerState>("idle");
+  const [timerState, setTimerState] = useState<TimerState>("edit");
 
   return (
     <timerStateDispatchContext.Provider value={setTimerState}>

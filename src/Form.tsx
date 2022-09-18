@@ -42,7 +42,7 @@ export default function Form({ className }: FormProps): JSX.Element {
           margin-bottom: 2rem;
         `}
       >
-        {timerState === "idle" ? (
+        {timerState === "edit" ? (
           <InputSection onSubmit={setTotalSeconds} />
         ) : (
           <Sign value={totalSeconds} onTimerChange={timerCallback} />
@@ -65,7 +65,7 @@ export default function Form({ className }: FormProps): JSX.Element {
             color: red;
           `}
           type="button"
-          onClick={() => dispatch("idle")}
+          onClick={() => dispatch("edit")}
         >
           Reset
         </button>
@@ -85,7 +85,7 @@ export default function Form({ className }: FormProps): JSX.Element {
 
 function getMainButtonMessage(state: TimerState): string {
   switch (state) {
-    case "idle":
+    case "edit":
       return "Start";
     case "ticking":
       return "Pause";
@@ -100,14 +100,14 @@ function getMainButtonMessage(state: TimerState): string {
 
 function getNextStateWhenSubmitted(state: TimerState): TimerState {
   switch (state) {
-    case "idle":
+    case "edit":
       return "ticking";
     case "ticking":
       return "paused";
     case "paused":
       return "ticking";
     case "done":
-      return "idle";
+      return "edit";
     default:
       throw new Error(`Unexpected state: ${state}`);
   }
