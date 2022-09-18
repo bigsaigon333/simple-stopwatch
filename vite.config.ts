@@ -9,4 +9,5 @@ export default defineConfig({
       babel: { plugins: ["@emotion/babel-plugin"] },
     }),
   ],
+  base: "simple-timer",
 });

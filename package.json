@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "eslint": "eslint --fix .",
-    "prettier": "prettier --ignore-unknown --write ."
+    "prettier": "prettier --ignore-unknown --write .",
+    "deploy": "yarn build && NODE_DEBUG=gh-pages gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/css": "^11.10.0",
@@ -30,6 +31,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "latest",
     "eslint-plugin-unicorn": "^43.0.2",
+    "gh-pages": "^4.0.0",
     "prettier": "2.7.1",
     "typescript": "^4.8.3",
     "vite": "^3.1.2"
