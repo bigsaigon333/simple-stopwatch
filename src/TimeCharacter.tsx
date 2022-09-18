@@ -26,7 +26,7 @@ export default function TimeCharacter({
       className={className}
       css={css`
         color: ${color};
-        ${!visible && "visibility: hidden;"}
+        ${!visible && "display: none;"}
         ${cursor && "border-right: 1px solid white;"}
         ${marginLeft != null && `margin-left:${marginLeft}`}
         ${marginRight != null && `margin-right:${marginRight}`}
