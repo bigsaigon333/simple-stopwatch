@@ -28,6 +28,7 @@ export default function Controls(): JSX.Element {
         width: 100%;
         display: flex;
         justify-content: space-between;
+        flex-direction: row-reverse;
       `}
     >
       <button css={buttonCss} type="submit" ref={okButtonReference}>
