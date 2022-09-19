@@ -25,9 +25,8 @@ export default function Page(): JSX.Element {
     <EditForm
       onSubmit={handleSubmit}
       placeholder={toTimeString(totalSeconds).padStart(6, "0")}
-    >
-      <Controls />
-    </EditForm>
+      submitDisabled={timerState === "edit" && totalSeconds === 0}
+    />
   ) : (
     <form
       css={formCss}

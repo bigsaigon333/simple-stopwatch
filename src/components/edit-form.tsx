@@ -8,17 +8,20 @@ import {
 import useBoolean from "../hooks/use-boolean";
 import Input from "./input";
 import { toTotalSeconds } from "../utils/utils";
+import Controls from "./controls";
 
 interface EditFormProperties {
   children?: ReactNode;
   onSubmit: (seconds: number) => void;
   placeholder: string;
+  submitDisabled?: boolean;
 }
 
 export default function EditForm({
   children,
   onSubmit,
   placeholder,
+  submitDisabled = false,
 }: EditFormProperties): JSX.Element {
   const [value, setValue] = useState("");
   const [isDirty, getDirty] = useBoolean(false);
@@ -42,6 +45,7 @@ export default function EditForm({
         onChange={handleChange}
         {...(!isDirty && { placeholder })}
       />
+      <Controls submitDisabled={submitDisabled && value === ""} />
       {children}
     </form>
   );

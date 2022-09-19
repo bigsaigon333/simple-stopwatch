@@ -8,7 +8,13 @@ import {
 import useToggle from "../hooks/use-toggle";
 import { useEffect, useRef } from "react";
 
-export default function Controls(): JSX.Element {
+interface ControlsProperties {
+  submitDisabled?: boolean;
+}
+
+export default function Controls({
+  submitDisabled = false,
+}: ControlsProperties): JSX.Element {
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
 
@@ -31,7 +37,12 @@ export default function Controls(): JSX.Element {
         flex-direction: row-reverse;
       `}
     >
-      <button css={buttonCss} type="submit" ref={okButtonReference}>
+      <button
+        css={buttonCss}
+        type="submit"
+        ref={okButtonReference}
+        disabled={submitDisabled}
+      >
         {getMainButtonMessage(timerState)}
       </button>
       <button
