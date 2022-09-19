@@ -85,4 +85,9 @@ const buttonCss = css`
   font-size: 1rem;
   font-weight: 600;
   padding: 0;
+  color: var(--color);
+
+  &:disabled {
+    color: var(--dimmed-color);
+  }
 `;

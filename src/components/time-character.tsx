@@ -27,7 +27,7 @@ export default function TimeCharacter({
       css={css`
         color: ${color};
         ${!visible && "display: none;"}
-        ${cursor && "border-right: 1px solid white;"}
+        ${cursor && "border-right: 1px solid var(--primary-color);"}
         ${marginLeft != undefined && `margin-left:${marginLeft};`}
         ${marginRight != undefined && `margin-right:${marginRight};`}
         ${fontSize === "medium" && "font-size: 2rem;"}

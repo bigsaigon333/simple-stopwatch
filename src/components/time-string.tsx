@@ -22,7 +22,7 @@ export default function TimeString({
     ...zeroPad,
     ...value,
   ].map<TimeCharacterProperties>((char, index) => ({
-    color: index < zeroPad.length ? "gray" : "white",
+    color: index < zeroPad.length ? "var(--dimmed-color)" : "var(--color)",
     visible: dirty || index >= zeroPad.length,
     cursor: dirty && focused && index === 5,
     char,
@@ -30,7 +30,7 @@ export default function TimeString({
   }));
 
   const hourMeasure: TimeCharacterProperties = {
-    color: value.length > 4 ? "white" : "gray",
+    color: value.length > 4 ? "var(--color)" : "var(--dimmed-color)",
     visible: dirty || value.length > 4,
     marginLeft: "1px",
     marginRight: "2px",
@@ -39,7 +39,7 @@ export default function TimeString({
   };
 
   const minuteMeasure: TimeCharacterProperties = {
-    color: value.length > 2 ? "white" : "gray",
+    color: value.length > 2 ? "var(--color)" : "var(--dimmed-color)",
     visible: dirty || value.length > 2,
     marginLeft: "1px",
     marginRight: "2px",
@@ -48,7 +48,7 @@ export default function TimeString({
   };
 
   const secondMeasure: TimeCharacterProperties = {
-    color: value.length > 0 ? "white" : "gray",
+    color: value.length > 0 ? "var(--color)" : "var(--dimmed-color)",
     visible: dirty || value.length > 0,
     marginLeft: focused ? 0 : "1px",
     marginRight: "2px",
@@ -71,11 +71,11 @@ export default function TimeString({
         ${dirty
           ? focused
             ? css`
-                border-bottom: 2px solid white;
+                border-bottom: 2px solid var(--primary-color);
                 padding-bottom: 10px;
               `
             : css`
-                border-bottom: 1px solid gray;
+                border-bottom: 1px solid var(--dimmed-color);
                 padding-bottom: 11px;
               `
           : css`
