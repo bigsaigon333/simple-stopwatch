@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { useCallback, useEffect, useState } from "react";
+
 import useInterval from "../hooks/use-interval";
 import {
   useTimerState,
@@ -17,11 +17,22 @@ export default function Sign({ defaultValue }: SignProperties) {
   const dispatch = useTimerStateDispatch();
 
   const [leftTime, setLeftTime] = useState(defaultValue);
+  const callback = useCallback(() => {
+    setLeftTime((previous) => {
+      document.title = toTimeTuple(previous - 1).join(":");
+
+      return previous - 1;
+    });
+  }, [setLeftTime]);
 
   const clearTimer = useInterval(
-    () => setLeftTime((previous) => previous - 1),
+    callback,
     timerState === "ticking" ? 1000 : undefined
   );
+
+  useEffect(() => {
+    document.title = toTimeTuple(defaultValue).join(":");
+  }, [defaultValue]);
 
   useEffect(() => {
     if (leftTime === 0) {
@@ -32,9 +43,6 @@ export default function Sign({ defaultValue }: SignProperties) {
 
   return (
     <div>
-      <Helmet>
-        <title>{toTimeTuple(leftTime).join(":")}</title>
-      </Helmet>
       <TimeString value={toTimeString(leftTime)} />
     </div>
   );

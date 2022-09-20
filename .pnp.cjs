@@ -52,7 +52,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:18.2.0"],\
-            ["react-helmet-async", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:1.3.0"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["vite", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:3.1.2"]\
           ],\
@@ -3605,16 +3604,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["invariant", [\
-        ["npm:2.2.4", {\
-          "packageLocation": "./.yarn/cache/invariant-npm-2.2.4-717fbdb119-cc3182d793.zip/node_modules/invariant/",\
-          "packageDependencies": [\
-            ["invariant", "npm:2.2.4"],\
-            ["loose-envify", "npm:1.4.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["ip", [\
         ["npm:2.0.0", {\
           "packageLocation": "./.yarn/cache/ip-npm-2.0.0-204facb3cc-cfcfac6b87.zip/node_modules/ip/",\
@@ -4795,46 +4784,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["react-fast-compare", [\
-        ["npm:3.2.0", {\
-          "packageLocation": "./.yarn/cache/react-fast-compare-npm-3.2.0-fbfa6627d9-8ef272c825.zip/node_modules/react-fast-compare/",\
-          "packageDependencies": [\
-            ["react-fast-compare", "npm:3.2.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["react-helmet-async", [\
-        ["npm:1.3.0", {\
-          "packageLocation": "./.yarn/cache/react-helmet-async-npm-1.3.0-240f565ac8-7ca7e47f8a.zip/node_modules/react-helmet-async/",\
-          "packageDependencies": [\
-            ["react-helmet-async", "npm:1.3.0"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:1.3.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-helmet-async-virtual-e4216baba7/0/cache/react-helmet-async-npm-1.3.0-240f565ac8-7ca7e47f8a.zip/node_modules/react-helmet-async/",\
-          "packageDependencies": [\
-            ["react-helmet-async", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:1.3.0"],\
-            ["@babel/runtime", "npm:7.19.0"],\
-            ["@types/react", "npm:18.0.20"],\
-            ["@types/react-dom", "npm:18.0.6"],\
-            ["invariant", "npm:2.2.4"],\
-            ["prop-types", "npm:15.8.1"],\
-            ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:18.2.0"],\
-            ["react-fast-compare", "npm:3.2.0"],\
-            ["shallowequal", "npm:1.1.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react-dom",\
-            "@types/react",\
-            "react-dom",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["react-is", [\
         ["npm:16.13.1", {\
           "packageLocation": "./.yarn/cache/react-is-npm-16.13.1-a9b9382b4f-f7a19ac349.zip/node_modules/react-is/",\
@@ -5114,15 +5063,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["shallowequal", [\
-        ["npm:1.1.0", {\
-          "packageLocation": "./.yarn/cache/shallowequal-npm-1.1.0-6688d419cb-f4c1de0837.zip/node_modules/shallowequal/",\
-          "packageDependencies": [\
-            ["shallowequal", "npm:1.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["shebang-command", [\
         ["npm:2.0.0", {\
           "packageLocation": "./.yarn/cache/shebang-command-npm-2.0.0-eb2b01921d-6b52fe8727.zip/node_modules/shebang-command/",\
@@ -5187,7 +5127,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:18.2.0"],\
-            ["react-helmet-async", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:1.3.0"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["vite", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:3.1.2"]\
           ],\
