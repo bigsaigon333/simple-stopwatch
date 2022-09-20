@@ -1,0 +1,1 @@
+(function(){"use strict";onmessage=function(t){const{type:e}=t.data;let a;if(e==="setInterval"){const{interval:s}=t.data;a=setInterval(()=>postMessage("tick"),s)}else if(e==="clearInterval")clearInterval(a);else throw new Error(`type is invalid: ${e}`)}})();
