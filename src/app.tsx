@@ -9,6 +9,8 @@ import {
 } from "./contexts/timer-context";
 import { toTimeString } from "./utils/utils";
 
+const MAX_TOTAL_SECONDS = 100 * 60 * 60 - 1; // 99h59m59s
+
 export default function App(): JSX.Element {
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
@@ -16,7 +18,9 @@ export default function App(): JSX.Element {
   const [totalSeconds, setTotalSeconds] = useState(0);
 
   const handleSubmit = (seconds: number) => {
-    setTotalSeconds(seconds);
+    const validatedSeconds = Math.min(MAX_TOTAL_SECONDS, seconds);
+
+    setTotalSeconds(validatedSeconds);
 
     dispatch(getNextStateWhenSubmitted(timerState));
   };
