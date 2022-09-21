@@ -2,10 +2,10 @@ import { css } from "@emotion/react";
 import Audio from "./audio";
 import {
   TimerState,
+  useMute,
   useTimerState,
   useTimerStateDispatch,
 } from "../contexts/timer-context";
-import useToggle from "../hooks/use-toggle";
 import { useEffect, useRef } from "react";
 
 interface ControlsProperties {
@@ -18,7 +18,7 @@ export default function Controls({
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
 
-  const [muted, toggle] = useToggle(false);
+  const [muted, toggle] = useMute();
 
   const okButtonReference = useRef<HTMLButtonElement>(null);
 
