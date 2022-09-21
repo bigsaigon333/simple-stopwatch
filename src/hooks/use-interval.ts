@@ -46,7 +46,10 @@ const useInterval = (
     return () => {
       myWorker.removeEventListener("message", handleMessage);
       myWorker.postMessage({ type: "clearInterval" });
-      console.log("useEffect return function invoked");
+
+      if (import.meta.env.DEV) {
+        console.log("useEffect return function invoked");
+      }
     };
   }, [callback, interval, update]);
 
