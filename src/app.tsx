@@ -9,7 +9,7 @@ import {
 } from "./contexts/timer-context";
 import { toTimeString } from "./utils/utils";
 
-export default function Page(): JSX.Element {
+export default function App(): JSX.Element {
   const dispatch = useTimerStateDispatch();
   const timerState = useTimerState();
 
