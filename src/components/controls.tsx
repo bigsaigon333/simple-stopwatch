@@ -52,8 +52,9 @@ export default function Controls({
         `}
         type="button"
         onClick={() => dispatch("edit")}
+        disabled={timerState === "edit"}
       >
-        Reset
+        Stop
       </button>
       <button css={buttonCss} type="button" onClick={() => toggle()}>
         {muted ? "unmute" : "mute"}
