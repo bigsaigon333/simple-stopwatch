@@ -58,6 +58,7 @@ export default (function Input({
           z-index: -2;
         `}
         pattern="\d*"
+        inputMode="numeric"
         value={value}
         onChange={onChange}
         onBlur={blur}
