@@ -1,7 +1,24 @@
 import { createMachine } from "xstate";
 
+interface Context {
+  userInputTime: number;
+}
+
+type Events =
+  | { type: "START"; userInputTime: number }
+  | { type: "RESET" }
+  | { type: "PAUSE" }
+  | { type: "STOP" }
+  | { type: "DONE" }
+  | { type: "RESUME" }
+  | { type: "OK" };
+
 const timerMachine = createMachine(
   {
+    schema: {
+      context: {} as Context,
+      events: {} as Events,
+    },
     id: "timer",
     predictableActionArguments: true,
     initial: "edit",
@@ -51,8 +68,8 @@ const timerMachine = createMachine(
   },
   {
     guards: {
-      userInputTimeValid: (_, event) => {
-        return event.userInputTime > 0;
+      userInputTimeValid(_, event) {
+        return event.type === "START" && event.userInputTime > 0;
       },
     },
   }
