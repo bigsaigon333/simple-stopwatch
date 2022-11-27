@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:18.2.0"],\
+            ["react-hook-form", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:7.39.6"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["vite", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:3.1.2"]\
           ],\
@@ -4784,6 +4785,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react-hook-form", [\
+        ["npm:7.39.6", {\
+          "packageLocation": "./.yarn/cache/react-hook-form-npm-7.39.6-c8784853b9-fa8327129a.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "npm:7.39.6"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:7.39.6", {\
+          "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-ce3e696033/0/cache/react-hook-form-npm-7.39.6-c8784853b9-fa8327129a.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:7.39.6"],\
+            ["@types/react", "npm:18.0.20"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-is", [\
         ["npm:16.13.1", {\
           "packageLocation": "./.yarn/cache/react-is-npm-16.13.1-a9b9382b4f-f7a19ac349.zip/node_modules/react-is/",\
@@ -5127,6 +5150,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.7.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:18.2.0"],\
+            ["react-hook-form", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:7.39.6"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["vite", "virtual:3c135f6e9bf817622a817dea36c71b8121e9aed25ace960cfaaba0a5064a006dc3d5caae115c2e4b56fe6a0335bcd8be364199a7e1246ba4ca801feb99d40d86#npm:3.1.2"]\
           ],\
